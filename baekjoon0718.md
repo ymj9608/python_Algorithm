@@ -1,7 +1,6 @@
 # 오늘 푼 알고리즘
 ## 백준 2869 달팽이는 올라가고 싶다 (브론즈1) 해결 완료
 ```python
-# 백준 2869 달팽이는 올라가고 싶다 (브론즈1)
 import math
 A, B, V = map(int, input().split())
 
@@ -10,7 +9,6 @@ print(math.ceil((V - A) / (A - B)) + 1)
 ---
 ## 백준 14626 ISBN (브론즈1) 런타임 오류 (아래는 수정코드)
 ```python
-# 백준 14626 ISBN (브론즈1) 런타임 오류
 # ISBN 코드를 리스트로 입력받습니다.
 isbn_list = list(input())
 
@@ -53,7 +51,6 @@ for m in range(10):
 
 ## 백준 2775 부녀회장이 될테야 (브론즈1) 해결 완료
 ```python
-# 백준 2775 부녀회장이 될테야
 T = int(input())
 
 for _ in range(T):
@@ -90,4 +87,34 @@ for _ in range(T):
              B[j] = sum(A[0:j+1])
         A[0:n] = B[0:n]
     print(B[n-1])
+```
+
+---
+## 백준 1259 팰린드롬수 (브론즈1) 해결 완료
+```python
+while True:
+    N = int(input())
+    a = [int(digit) for digit in str(N)]
+    b = [0] * len(a)
+
+    for i in range(len(a)):
+        b[i] = a[len(a) - i - 1]
+
+    num1 = "".join(map(str, a[0:]))
+    num2 = "".join(map(str, b[0:]))
+
+    if N == 0:
+        break
+    else:
+        if int(num1) == int(num2):
+            print("yes")
+        else:
+            print("no")
+```
+- 코드리뷰 (팰린드롬수)
+아래는 input으로 수를 입력하면 각 자리수를 str 형태로 저장함.
+두번째 줄은 리스트 a의 0번째 인덱스부터 끝까지 숫자를 str 형태로 변환하여 다시 수 형태로 저장
+```python
+a = [int(digit) for digit in str(N)]
+num1 = "".join(map(str, a[0:]))
 ```
