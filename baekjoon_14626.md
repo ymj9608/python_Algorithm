@@ -1,6 +1,14 @@
-# 오늘 배운것
+# 오늘 푼 알고리즘
+```python
+# 백준 2869 달팽이는 올라가고 싶다 (브론즈1)
+import math
+A, B, V = map(int, input().split())
+
+print(math.ceil((V - A) / (A - B)) + 1)
+```
 
 ```python
+# 백준 14626 ISBN (브론즈1) 런타임 오류
 # ISBN 코드를 리스트로 입력받습니다.
 isbn_list = list(input())
 
@@ -35,3 +43,6 @@ for m in range(10):
         print(m)
         break
 ```
+
+# 코드리뷰
+ISBN 문제에서 런타임 오류가 발생했다. 우선 m을 구하는 방식에 대해 고민하고, if와 for문을 최소화하여 코드를 구성하는 것이 시간복잡도를 줄이는 방법이니 고민해볼 것.
