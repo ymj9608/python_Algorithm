@@ -60,8 +60,9 @@ for _ in range(number_of_cut): # 자른 횟수만큼 입력하기 위해 for문 
         length_cut.append(number) # 세로 자르기 번호 리스트에 추가
     else: # 자르는 방향이 0이면 가로
         width_cut.append(number) # 가로 자르기 번호 리스트에 추가
-    length_cut.sort() # 세로 번호 정렬
-    width_cut.sort() # 가로 번호 정렬
+
+length_cut.sort() # 세로 번호 정렬
+width_cut.sort() # 가로 번호 정렬
 
 length_cut.append(width) # 세로 자르기 번호에 가로 길이 추가 (ex 가로 길이 10이고 세로 자르기 2, 5, 8일 때, length_cut = [0, 2, 5, 8, 10])
 width_cut.append(length) # 가로 자르기 번호에 세로 길이 추가 (ex 세로 길이 8이고 가로 자르기 1, 3, 6일 때, width_cut = [0, 1, 3, 6, 8])
@@ -110,5 +111,44 @@ print(numbers)  # 출력: [9, 6, 5, 4, 3, 2, 1, 1]
 data = [(1, 5), (1, 2), (2, 3)]
 data.sort(key=lambda x: (x[0], -x[1]))
 print(data)  # 출력: [(1, 5), (1, 2), (2, 3)]
+```
+---
+# 백준 2559 수열 실버3 부분 성공
+```python
+N, K = map(int, input().split())
+my_list = list(map(int, input().split()))
+max_temp = -10000000
+
+if K == 1:
+    max_temp = max(my_list)
+else:
+    for i in range(N - K + 1):
+        sum_temp = sum(my_list[i : i + K])
+        if sum_temp > max_temp:
+            max_temp = sum_temp
+
+print(max_temp)
+```
+- 코드리뷰
+1. N이 커지면 슬라이싱하여 sum을 계속하므로 시간이 오래 걸리는 문제(시간 초과)가 발생함.  
+슬라이싱 윈도우라는 기법으로 아래와 같이 초기항을 구한 다음, 맨 첫항을 빼고, 다음항만 더해주면 다음 구간합을 구하는 데 효율적임
+2. range(인덱스) 설정의 오류로 마지막항을 계산하지 않고 넘어가는 문제점이 발생함. 1부터 N - K까지로 설정해야 함.
+1부터 N-K까지 반복해야 모든 경우를 계산할 수 있음 귀찮더라도 꼭 확인하는 습관 기르기  
+3. max_temp = -10000000으로 설정했는데, my_list = [-20000000, -30000000]인 경우  max_temp = -500000000이 되어야 하나, -10000000이 되므로 max_temp를 초기값으로 바꿔줘야 함.
+- 최종 제출 코드
+```python
+N, K = map(int, input().split())
+my_list = list(map(int, input().split()))
+
+max_temp = sum(my_list[0 : K])
+sum_temp = sum(my_list[0 : K])
+
+for i in range(1, N - K + 1):
+    sum_temp -= my_list[i - 1]
+    sum_temp += my_list[K + i - 1]
+    if sum_temp > max_temp:
+        max_temp = sum_temp
+
+print(max_temp)
 ```
 ---
